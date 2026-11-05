@@ -1,0 +1,17 @@
+node_modules
+dist
+.DS_Store
+
+# Netlify 本地构建/发布产物
+.netlify
+.netlify-publish
+
+# 环境变量与本地配置
+.env
+.env.local
+*.local
+
+# 编辑器
+.vscode/*
+!.vscode/extensions.json
+.idea

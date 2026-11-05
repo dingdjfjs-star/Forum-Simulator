@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forum-bg: #f5f0eb;
+  --color-forum-header: #4a6d8c;
+  --color-forum-accent: #5b8c5a;
+  --color-forum-border: #d4c5b2;
+  --color-forum-card: #fffef9;
+  --color-forum-quote: #f0ebe3;
+  --color-forum-floor: #e8e0d5;
+  --color-forum-hover: #ede5db;
+  --color-forum-text: #2d2d2d;
+  --color-forum-text-muted: #6b6b6b;
+}
+
+/* 暗色模式变量 */
+.dark {
+  --color-forum-bg: #1a1a2e;
+  --color-forum-header: #6b8fad;
+  --color-forum-accent: #6b9e6a;
+  --color-forum-border: #2d2d44;
+  --color-forum-card: #252538;
+  --color-forum-quote: #2a2a3e;
+  --color-forum-floor: #2d2d44;
+  --color-forum-hover: #303048;
+  --color-forum-text: #e0e0e0;
+  --color-forum-text-muted: #9999aa;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-forum-bg);
+  color: var(--color-forum-text);
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 暗色模式下的通用样式覆盖 */
+.dark input,
+.dark textarea {
+  background-color: var(--color-forum-card);
+  color: var(--color-forum-text);
+  border-color: var(--color-forum-border);
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: var(--color-forum-text-muted);
+  opacity: 0.6;
+}
+
+.dark input:focus,
+.dark textarea:focus {
+  border-color: var(--color-forum-header);
+}
+
+/* 论坛楼层样式 */
+.forum-floor {
+  background: var(--color-forum-card);
+  border: 1px solid var(--color-forum-border);
+  border-radius: 6px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.forum-floor:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.dark .forum-floor:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 引用框 */
+.quote-box {
+  background: var(--color-forum-quote);
+  border-left: 3px solid var(--color-forum-accent);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+  color: var(--color-forum-text-muted);
+}
+
+/* 小尾巴 */
+.signature {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--color-forum-border);
+  color: var(--color-forum-text-muted);
+  font-size: 0.85rem;
+}
+
+/* 主楼样式 */
+.main-post {
+  background: var(--color-forum-card);
+  border: 2px solid var(--color-forum-header);
+  border-radius: 8px;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* 骨架屏 */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-forum-floor) 25%, var(--color-forum-hover) 50%, var(--color-forum-floor) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-forum-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-forum-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-forum-header);
+}
+
+/* 链接通用样式 */
+a {
+  color: var(--color-forum-header);
+}
+
+/* 文字颜色工具类 */
+.text-muted {
+  color: var(--color-forum-text-muted);
+}
+
+.text-default {
+  color: var(--color-forum-text);
+}
+
+/* ============ 视觉升级（v2） ============ */
+
+/* 卡片悬停上浮 */
+.card-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+.dark .card-lift:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* 板块色条（板块卡片、帖子卡片左侧） */
+.board-bar {
+  position: relative;
+  overflow: hidden;
+}
+.board-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--bar-color, var(--color-forum-header));
+  opacity: 0.9;
+}
+.board-bar:hover::before {
+  width: 6px;
+}
+
+/* 徽章 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* 坛主徽章 */
+.badge-admin {
+  background: linear-gradient(135deg, #f6c453, #e8a33d);
+  color: #4a3410;
+  font-weight: 700;
+}
+
+/* 统计数字 */
+.stat-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* 首页 Hero */
+.hero-gradient {
+  background:
+    radial-gradient(1200px 300px at 15% -10%, rgba(255, 255, 255, 0.35), transparent 60%),
+    linear-gradient(135deg, var(--color-forum-header), #2f4a63);
+  color: #fff;
+}
+.dark .hero-gradient {
+  background:
+    radial-gradient(1200px 300px at 15% -10%, rgba(255, 255, 255, 0.12), transparent 60%),
+    linear-gradient(135deg, #35526d, #22334a);
+}
+
+/* 头像堆叠 */
+.avatar-stack > * {
+  margin-left: -8px;
+  border: 2px solid var(--color-forum-card);
+  border-radius: 9999px;
+}
+.avatar-stack > *:first-child {
+  margin-left: 0;
+}
+
+/* 搜索关键词高亮 */
+mark.kw {
+  background: #ffe9a8;
+  color: #6b4a00;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+.dark mark.kw {
+  background: #6b5a1e;
+  color: #ffe9a8;
+}
+
+/* 帖子正文阅读体验 */
+.post-body {
+  font-size: 0.9375rem;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+/* 小屏优化 */
+@media (max-width: 640px) {
+  .forum-floor {
+    border-radius: 8px;
+  }
+  .main-post {
+    padding: 1rem;
+  }
+  .hero-gradient h2 {
+    font-size: 1.35rem;
+  }
+}
+
+/* 文本截断到两行（连载简介、角色描述用） */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 带配图的帖子卡片缩略图 */
+.thumb-strip {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+.thumb-strip img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--color-forum-border);
+}
+
+
